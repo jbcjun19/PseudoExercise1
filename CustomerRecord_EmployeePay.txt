@@ -11,8 +11,8 @@ and print the customer’s name, purchase amount, sales tax and total amount due
 
 Module Main
 	Declare String name
-	Declare Real purchase_amt
-	Declare Integer tax_code
+	Declare Real purchase_amt // $ 00.00
+	Declare Integer tax_code // values 0  through 3
 	Declare Real sales_tax
 	Declare Real total
 
@@ -24,14 +24,18 @@ Module Main
 	Input tax_code
 
 	// calculate sales tax depending on given code
-	If(tax_code == 0) Then
-		Set sales_tax = 0.0
-	Else if(tax_code == 1)
-		Set sales_tax = 0.03
-	Else if(tax_code == 2)
-		Set sales_tax = 0.05
-	Else if(tax_code == 3)
-		Set sales_tax = 0.07
+	Do :
+		If(tax_code == 0) Then
+			Set sales_tax = 0.0
+		Else if(tax_code == 1)
+			Set sales_tax = 0.03
+		Else if(tax_code == 2)
+			Set sales_tax = 0.05
+		Else if(tax_code == 3)
+			Set sales_tax = 0.07
+		Else
+			Print "Bad input. Please choose a number between 0 and 3."
+	while (tax_code < 0 OR tax_code > 3) // condition		
 
 	// calculate total cost
 	Set total = purchase_amt * (1 + sales_tax)
@@ -80,7 +84,7 @@ Module Main
 	Input hrWorked
 
 	// validate whether pay rate and hours worked are in range
-	If(payRate <= MAX_HRLY_RATE && hrWorked <= MAX_HR_ALLOWED) Then
+	If(payRate <= MAX_HRLY_RATE && hrWorked <= MAX_HR_ALLOWED) Then 					// in range
 		// calculate weekly pay
 		If(hrWorked <= 35) Then
 			Set wklyPay = hrWorked * payRate
@@ -89,7 +93,7 @@ Module Main
 		
 		Display "The weekly pay for recorded hours of ", hrWorked, " is $", wklyPay
 	
-	Else
+	Else																				// out of range
 		Display "ERROR: The values you entered is out of range."
 		Display "Employee's weekly pay cannot be calculated at this time."
 
